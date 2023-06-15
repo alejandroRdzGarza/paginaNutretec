@@ -1,0 +1,44 @@
+.SeccionDieta {
+    position: relative;
+    right: 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.text{
+    color: black;
+}
+
+table {
+    background-color: white;
+    border: 2px solid black;
+    width: 90%;
+}
+ 
+th {
+    border: 1px solid black;
+}
+ 
+td {
+    text-align: center;
+    border: 1px solid black;
+}
+
+.SeccionDieta>table>tr>td>:nth-child(1) {
+    font-weight: bold;
+    color: black;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.SeccionDieta>table>tr>td>:nth-child(2) {
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.SeccionDieta>table>tr>td>:nth-child(3) {
+    color: red;
+    margin-bottom: 0.5rem;
+}
