@@ -6,7 +6,15 @@ import {useNavigate} from 'react-router-dom'
 const Survey = () => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
-        sueno: 0
+        medicamento: "No",
+        desayuno: "No",
+        comida: "No",
+        cena: "No",
+        insomnio: "No",
+        tiempo: 0,
+        ejercicio: "No",
+        sueno: 0,
+        IDusuario: JSON.parse(localStorage.getItem('user')).IDusuario,
     });
     const [success, setSuccess] = useState(false);
     const [showHoursSlept, setShowHoursSlept] = useState(true);
@@ -14,7 +22,6 @@ const Survey = () => {
 
     const onSubmitForm = (e) => {
         e.preventDefault();
-        console.log(formData);
 
         axios.post('http://localhost:8080/api/cuestionario', formData)
             .then((response) => {
@@ -30,7 +37,7 @@ const Survey = () => {
         const isChecked = inputData.target.checked;
         setFormData({
             ...formData,
-            insomnio: isChecked ? inputData.target.value : "",
+            insomnio: isChecked ? "Si" : "No",
             sueno: isChecked ? 0 : formData.sueno // Establecer el valor en 0 si el checkbox de insomnio se deselecciona
         });
         setShowHoursSlept(!isChecked);
@@ -41,7 +48,7 @@ const Survey = () => {
         setShowExerciseHours(isChecked);
         setFormData({
             ...formData,
-            ejercicio: isChecked ? inputData.target.value : "",
+            ejercicio: isChecked ? "Si" : "No",
             tiempo: isChecked ? formData.tiempo : 0 // Establecer el valor en 0 si el checkbox de ejercicio se deselecciona
         });
     };
@@ -95,21 +102,21 @@ const Survey = () => {
                         <label>Desayuno</label>
                         <input onChange={(inputData) => { setFormData({
                             ...formData,
-                            desayuno: inputData.target.value
+                            desayuno: "Si"
                         })  }} type="checkbox" name="desayuno_r" id="desayuno" />
                     </div>
                     <div className="inputContainer">
                         <label>Comida</label>
                         <input onChange={(inputData) => { setFormData({
                             ...formData,
-                            comida: inputData.target.value
+                            comida: "Si"
                         })  }} type="checkbox" name="comida_r" id="comida" />
                     </div>
                     <div className="inputContainer">
                         <label>Cena</label>
                         <input onChange={(inputData) => { setFormData({
                             ...formData,
-                            cena: inputData.target.value
+                            cena: "Si"
                         })  }} type="checkbox" name="cena_r" id="cena" />
                     </div>
                     <div className="inputContainer">
@@ -142,7 +149,7 @@ const Survey = () => {
                         <label>Tomaste algun medicamento?</label>
                         <input onChange={(inputData) => { setFormData({
                             ...formData,
-                            medicamento: inputData.target.value
+                            medicamento: "Si"
                         })  }} type="checkbox" name="medicamento_r" id="medicamento" />
                     </div>
                     <div className="inputContainer">

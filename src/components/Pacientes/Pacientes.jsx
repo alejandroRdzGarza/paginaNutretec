@@ -1,128 +1,85 @@
-import React, { useEffect, useState } from 'react';
 import './Pacientes.css'
-import profile_image from '../../assets/user.jpg'
-import medalla from '../../assets/Medalla.jpg'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Pacientes = () => {
+const Login = () => {
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({});
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(null);
+    const [cuestionariosData, setCuestionariosData] = useState(null);
 
-    const [data, setData] = useState(null);
-    const [data2, setData2] = useState(null);
-    const [, setError] = useState(null);
+    const onSubmitLogin = (e) => {
+        e.preventDefault();
 
-    useEffect(() => {
-        const fetchData = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/api/estadisticas');
-            setData(response.data);
-        } catch (error) {
-            setError(error.message);
-        }
-        };
+        axios.post('http://localhost:8080/api/cuestionarioByUserId', formData)
+            .then((response) => {
+                const pacienteInfo = response.data;
+                    localStorage.setItem('pacienteInfo', JSON.stringify(pacienteInfo))
+                    console.log('pacienteInfo', pacienteInfo)
+                setSuccess(true);
+                setCuestionariosData(response.data);
+                console.log(cuestionariosData);
+                const dataCuestionarios = response.data;
+                console.log(dataCuestionarios);
+                console.log(dataCuestionarios);
 
-        fetchData();
-    }, []);
+                // if (response.data.tipoUsuario === "paciente") {
+                    
+                //     setSuccess(true);
+                //     setError(null);
+                // } else if (response.data.tipoUsuario === "medico") {
+                    
+                //     setSuccess('medico');
+                //     setError(null);
+                // } else if (response.data === "Contraseña incorrecta") {
+                //     setSuccess(false);
+                //     setError("Contraseña incorrecta");
+                // } else if (response.data === "El usuario no existe") {
+                //     setSuccess(false);
+                //     setError("El usuario no existe");
+                // }
+            })
+            .catch((error) => {
+                console.error(error);
+                setSuccess(false);
+                setError("Ocurrió un error al iniciar sesión");
+            });
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = date.getDate();
-        const monthNames = [
-            'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-            'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
-        ];
-        const month = monthNames[date.getMonth()];
-        const year = date.getFullYear();
-        return `${day+1} de ${month} del ${year}`;
+        
     };
 
-    useEffect(() => {
-        const fetchData = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/api/usuarios');
-            setData2(response.data);
-        } catch (error) {
-            setError(error.message);
-        }
-        };
-
-        fetchData();
-    }, []);
-
     return (
-        <div className='SeccionProfile'>
-            <div className='fotitos'>
-                <div>
-                    <img className='foto_profile' src={profile_image} alt=''/>
-                </div>
-                <div>
-                    <img className='foto_medalla' src={medalla} alt=''/>
-                    <span className='bandera_medalla'>Medalla</span>
-                </div>
-            </div>
-            <div className='datitos'>
-                {data2 && (
-                    <div className='personal_profile'>
-                        <div className='bandera_profile'>
-                            <span>Datos personales</span>
+        <>
+            {success === true ? (
+                <h1>Popo</h1>
+            ) : (
+                <section>
+                    <h1 className='text'>Busca cuestionarios de tus pacientes</h1>
+                    <form onSubmit={onSubmitLogin}>
+                        <label htmlFor="username" className='text'>Ingresa el email del paciente:</label>
+                        <div className="inputContainer">
+                            <input
+                                onChange={(inputData) => {
+                                    setFormData({
+                                        ...formData,
+                                        email: inputData.target.value
+                                    });
+                                }}
+                                type="text"
+                                name=""
+                                id="email"
+                            />
                         </div>
-                        <div className='cosas_nombre'>
-                            <span>Nombre del usuario</span>
-                            <div className='rectangulo_nombre'>{data2[13].nombre}</div>
-                        </div>
-                        <div className='line_perso'>
-                        <div className='fechita'>
-                            <span>Fecha de nacimiento</span>
-                            <div className='rectangulo_fecha'>{data2[13] && formatDate(data2[13].fechaNacimiento)}</div>
-                        </div>
-                            <div className='cel'>
-                                <span>Telefono</span>
-                                <div className='rectangulo_telefono'>{data2[13].telefono}</div>
-                            </div>
-                            <div className='correito'>
-                                <span>Correo electronico</span>
-                                <div className='rectangulo_correo'>{data2[13].email}</div>
-                            </div>
-                        </div>
-                    </div>
-                )}
-                {data && (
-                    <div className='estadisticas_profile'>
-                        <div className='bandera_estadisticas'>
-                            <span>Estadisticas</span>
-                        </div>
-                        <div className='line_1'>
-                            <div className='trofeitos'>
-                                <span>Trofeos</span>
-                                <div className='rectangulo_trofeos'>{data[0].trofeos}</div>
-                            </div>
-                            <div className='carre_comple'>
-                                <span>Carreras completadas</span>
-                                <div className='rectangulo_completas'>{data[0].juegosCompletados}</div>
-                            </div>
-                            <div className='carre_incom'>
-                                <span>Carreras frustadas</span>
-                                <div className='rectangulo_frustadas'>{data[0].juegosFrustrados}</div>
-                            </div>
-                        </div>
-                        <div className='line_2'>
-                            <div className='efectividad'>
-                                <span>Efectividad</span>
-                                <div className='rectangulo_efectividad'>{data[0].efectividad}%</div>
-                            </div>
-                            <div className='puntaje'>
-                                <span>Mejor puntaje</span>
-                                <div className='rectangulo_puntaje'>{data[0].mejorPuntaje}</div>
-                            </div>
-                            <div className='racha'>
-                                <span>Racha de dias</span>
-                                <div className='rectangulo_racha'>{data[0].rachaDias}</div>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
-        </div>
+                        <button type="submit" onClick={() => navigate('/cuestionarios')}>Buscar</button>
+                        {error && <p className="error">{error}</p>} {/* Mostrar mensaje de error si existe */}
+                    </form>
+                </section>
+            )}
+        </>
     )
 }
 
-export default Pacientes
+export default Login
+

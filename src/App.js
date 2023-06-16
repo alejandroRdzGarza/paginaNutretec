@@ -21,6 +21,7 @@ import HeroMedico from './components/HeroMedico/HeroMedico';
 import HeaderMedico from './components/HeaderMedico/HeaderMedico';
 import ProgramsMedic from './components/ProgramsMedic/ProgramsMedic';
 import Pacientes from './components/Pacientes/Pacientes';
+import DynamicTable from './components/DynamicTable/DynamicTable';
 
 function App() {
   return (
@@ -91,6 +92,11 @@ function App() {
           <Route path="/pacientes" element={[
             <HeaderMedico/>,
             <Pacientes/>,
+            <Footer/>
+          ]}/>
+          <Route path="/cuestionarios" element={[
+            <HeaderMedico/>,
+            <DynamicTable/>,
             <Footer/>
           ]}/>
         </Routes>

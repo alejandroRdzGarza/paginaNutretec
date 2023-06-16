@@ -10,6 +10,7 @@ const Profile = () => {
     const [data, setData] = useState(null);
     const [data2, setData2] = useState(null);
     const [, setError] = useState(null);
+    let userDetails = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,20 +69,20 @@ const Profile = () => {
                         </div>
                         <div className='cosas_nombre'>
                             <span>Nombre del usuario</span>
-                            <div className='rectangulo_nombre'>{data2[13].nombre}</div>
+                            <div className='rectangulo_nombre'>{userDetails.nombre}</div>
                         </div>
                         <div className='line_perso'>
                         <div className='fechita'>
                             <span>Fecha de nacimiento</span>
-                            <div className='rectangulo_fecha'>{data2[13] && formatDate(data2[13].fechaNacimiento)}</div>
+                            <div className='rectangulo_fecha'>{userDetails && formatDate(userDetails.fechaNacimiento)}</div>
                         </div>
                             <div className='cel'>
                                 <span>Telefono</span>
-                                <div className='rectangulo_telefono'>{data2[13].telefono}</div>
+                                <div className='rectangulo_telefono'>{userDetails.telefono}</div>
                             </div>
                             <div className='correito'>
                                 <span>Correo electronico</span>
-                                <div className='rectangulo_correo'>{data2[13].email}</div>
+                                <div className='rectangulo_correo'>{userDetails.email}</div>
                             </div>
                         </div>
                     </div>
