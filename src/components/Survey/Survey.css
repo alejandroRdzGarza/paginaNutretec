@@ -1,0 +1,59 @@
+.SeccionEntera {
+    position: relative;
+    left: 33.5rem;
+    width: 30%;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+    text-transform: uppercase;
+}
+
+.inputContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+input {
+    width: 100%;
+    height: 2rem;
+    border-radius: 10px;
+    border: none;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+label {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.cuesti {
+    color: white;
+    background-color: blueviolet;
+    width: 14rem;
+    font-size: 1.5rem;
+}
+
+p>button {
+    display: flex;
+    position: relative;
+    left: 6rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
