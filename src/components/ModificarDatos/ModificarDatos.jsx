@@ -20,13 +20,13 @@ const ModificarDatos = () => {
     const [error, setError] = useState(null);
     let idUsuario = JSON.parse(localStorage.getItem('user')).IDusuario;
 
-    const handleClick = (e) => {
-        if(formData.tipoUsuario === "paciente") {
-            navigate('/profile');
-        }else{
-            navigate('/profile_arnold');
-        }
-      };
+    // const handleClick = (e) => {
+    //     if(formData.tipoUsuario === "paciente") {
+    //         navigate('/profile');
+    //     }else{
+    //         navigate('/profile_arnold');
+    //     }
+    //   };
 
     const onSubmitRegister = (e) => {
         e.preventDefault();
@@ -35,10 +35,6 @@ const ModificarDatos = () => {
             ...formData,
             fechaDeRegistro: currentDate, // Agregar la fecha actual al formData
         };
-        console.log(updatedFormData);
-        if(updatedFormData.tipoUsuario === undefined) {
-            updatedFormData.tipoUsuario = "paciente";
-        }
         console.log('http://localhost:8080/api/usuario/'+idUsuario);
         axios.put('http://localhost:8080/api/usuario/'+idUsuario, updatedFormData)
         .then((response) => {
@@ -102,16 +98,7 @@ const ModificarDatos = () => {
                         <input onChange={(inputData) => { setFormData({
                                 ...formData,
                                 telefono: inputData.target.value
-                            })  }} type="text" name="" id="" />
-
-                        <label htmlFor="username">
-                            <span className='text'>Correo electronico:</span>
-                        </label>
-                        <input onChange={(inputData) => { setFormData({
-                                ...formData,
-                                email: inputData.target.value
-                            })  }} type="text" name="" id="" />
-                        
+                            })  }} type="text" name="" id="" />                        
                         <label htmlFor="username">
                             <span className='text'>Fecha de Nacimiento:</span>
                         </label>
@@ -119,15 +106,7 @@ const ModificarDatos = () => {
                                 ...formData,
                                 fechaNacimiento: inputData.target.value
                             })  }} type="date" name="" id="" />
-
-                        <label htmlFor="password">
-                            <span className='text'>Contraseña:</span>
-                        </label>
-                        <input onChange={(inputData) => { setFormData({
-                                ...formData,
-                                contrasena: inputData.target.value
-                            })  }} type="password" name="" id="" />
-                        <button onClick={handleClick}>Modificar Datos</button>
+                        <button onClick={() => navigate('/login')}>Modificar Datos</button>
                         {error && <p className="errmsg">{error} </p>}
                     </form>
                     
