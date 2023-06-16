@@ -1,14 +1,19 @@
 import './Pacientes.css'
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({});
-    const [success, setSuccess] = useState(false);
+    //const [success, setSuccess] = useState(false);
     const [error, setError] = useState(null);
     const [cuestionariosData, setCuestionariosData] = useState(null);
+    const [isShown, setIsShown] = useState(false);
+
+    const handleClick = (e) => {
+        setIsShown(current => !current);
+      };
 
     const onSubmitLogin = (e) => {
         e.preventDefault();
@@ -18,7 +23,7 @@ const Login = () => {
                 const pacienteInfo = response.data;
                     localStorage.setItem('pacienteInfo', JSON.stringify(pacienteInfo))
                     console.log('pacienteInfo', pacienteInfo)
-                setSuccess(true);
+                //setSuccess(true);
                 setCuestionariosData(response.data);
                 console.log(cuestionariosData);
                 const dataCuestionarios = response.data;
@@ -43,7 +48,7 @@ const Login = () => {
             })
             .catch((error) => {
                 console.error(error);
-                setSuccess(false);
+                //setSuccess(false);
                 setError("Ocurrió un error al iniciar sesión");
             });
 
@@ -52,9 +57,6 @@ const Login = () => {
 
     return (
         <>
-            {success === true ? (
-                <h1>Popo</h1>
-            ) : (
                 <section>
                     <h1 className='text'>Busca cuestionarios de tus pacientes</h1>
                     <form onSubmit={onSubmitLogin}>
@@ -72,11 +74,13 @@ const Login = () => {
                                 id="email"
                             />
                         </div>
-                        <button type="submit" onClick={() => navigate('/cuestionarios')}>Buscar</button>
+                        <button type="submit" onClick={handleClick}>Buscar</button>
+                        {isShown && (
+                            <button  onClick={() => navigate('/cuestionarios')}>Ver resultados</button>
+                        )}
                         {error && <p className="error">{error}</p>} {/* Mostrar mensaje de error si existe */}
                     </form>
                 </section>
-            )}
         </>
     )
 }

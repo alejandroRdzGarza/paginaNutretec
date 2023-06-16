@@ -16,12 +16,13 @@ import Profile from './components/Profile/Profile';
 import Videogame from './components/Videogame/Videogame';
 import Prueba from './components/Prueba/Prueba';
 import PruebaRegistro from './components/PruebaRegistro/Pruebaregistro';
-import ProfileArnold from './components/ProfileArnold/ProfileArnold';
+import PerfilMedico from './components/PerfilMedico/PerfilMedico';
 import HeroMedico from './components/HeroMedico/HeroMedico';
 import HeaderMedico from './components/HeaderMedico/HeaderMedico';
 import ProgramsMedic from './components/ProgramsMedic/ProgramsMedic';
 import Pacientes from './components/Pacientes/Pacientes';
 import DynamicTable from './components/DynamicTable/DynamicTable';
+import ModificarDatos from './components/ModificarDatos/ModificarDatos';
 
 function App() {
   return (
@@ -86,7 +87,7 @@ function App() {
           ]}/>
           <Route path="/profile_arnold" element={[
             <HeaderMedico/>,
-            <ProfileArnold/>,
+            <PerfilMedico/>,
             <Footer/>
           ]}/>
           <Route path="/pacientes" element={[
@@ -97,6 +98,11 @@ function App() {
           <Route path="/cuestionarios" element={[
             <HeaderMedico/>,
             <DynamicTable/>,
+            <Footer/>
+          ]}/>
+          <Route path="/modificarDatos" element={[
+            <HeaderMedico/>,
+            <ModificarDatos/>,
             <Footer/>
           ]}/>
         </Routes>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './ProfileArnold.css'
+import './PerfilMedico.css'
 import profile_image from '../../assets/medico.png'
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
 
 
 
-const ProfileArnold = () => {
+const PerfilMedico = () => {
     const navigate = useNavigate()
     const [data2, setData2] = useState(null);
     const [, setError] = useState(null);
@@ -79,9 +79,11 @@ const ProfileArnold = () => {
                     </div>
                 )}
             </div>
+            <button className='Modificar' onClick={() => navigate('/modificarDatos')}>Modificar Datos</button>
             <button className='Cerrar' onClick={logoutOnClick}>Cerrar Sesion</button>
+
         </div>
     )
 }
 
-export default ProfileArnold
+export default PerfilMedico
