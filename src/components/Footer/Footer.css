@@ -4,6 +4,7 @@
 
 .Footer-all>hr {
     border: 1px solid var(--green);
+    margin: 0;
 }
 
 .footer {

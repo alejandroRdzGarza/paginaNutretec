@@ -15,7 +15,7 @@
 .right-h{
     flex: 1;
     position: relative;
-    background-color: var(--green);
+    background: linear-gradient(to bottom right, limegreen, cyan);
 }
 
 .the-best-ad{
@@ -136,7 +136,7 @@
 
 .hero-image_medico{
     position: absolute;
-    top: 7.4rem;
+    top: 10.1rem;
     right: 6rem;
     width: 25rem;
 }

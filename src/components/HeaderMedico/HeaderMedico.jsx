@@ -1,6 +1,6 @@
 import React from 'react'
 import './HeaderMedico.css'
-import Logo from '../../assets/NutreTec.png'
+import Logo from '../../assets/Nutretec blanco.png'
 import {Link} from 'react-router-dom'
 
 const Header = () => {
