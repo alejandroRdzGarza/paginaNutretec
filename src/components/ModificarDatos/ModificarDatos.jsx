@@ -22,7 +22,7 @@ const ModificarDatos = () => {
 
     const handleClick = (e) => {
         if(formData.tipoUsuario === "paciente") {
-            navigate('/Profile');
+            navigate('/profile');
         }else{
             navigate('/profile_arnold');
         }
@@ -39,7 +39,7 @@ const ModificarDatos = () => {
         if(updatedFormData.tipoUsuario === undefined) {
             updatedFormData.tipoUsuario = "paciente";
         }
-
+        console.log('http://localhost:8080/api/usuario/'+idUsuario);
         axios.put('http://localhost:8080/api/usuario/'+idUsuario, updatedFormData)
         .then((response) => {
             const user = response.data;
@@ -64,13 +64,6 @@ const ModificarDatos = () => {
         return `${year}-${month}-${day}`;
     }
 
-    const handleTipoUsuarioChange = (inputData) => {
-        const isChecked = inputData.target.checked;
-        setFormData({
-            ...formData,
-            tipoUsuario: isChecked ? "medico" : "paciente"
-        });
-    };
 
     return (
         <div className='SeccionRegistro'>
@@ -134,12 +127,7 @@ const ModificarDatos = () => {
                                 ...formData,
                                 contrasena: inputData.target.value
                             })  }} type="password" name="" id="" />
-
-                        <div className='nutrici'>
-                        <label>Nutricionista?</label>
-                        <input onChange={handleTipoUsuarioChange} type="checkbox" name="" id=""  placeholder='paciente'/>
-                        </div>
-                        <button onClick={handleClick}>Registrarse</button>
+                        <button onClick={handleClick}>Modificar Datos</button>
                         {error && <p className="errmsg">{error} </p>}
                     </form>
                     

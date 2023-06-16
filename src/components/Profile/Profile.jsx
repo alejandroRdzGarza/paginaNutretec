@@ -123,6 +123,7 @@ const Profile = () => {
                     </div>
                 )}
             </div>
+            <button className='Modificar' onClick={() => navigate('/modificarDatos')}>Modificar Datos</button>
             <button className='Cerrar_user' onClick={() => navigate('/')}>Cerrar Sesion</button>
         </div>
     )

@@ -267,6 +267,25 @@
 
 .Cerrar_user {
     position: relative;
+    display: inline-block;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    right: 37rem;
+    top: 25rem;
+    border-radius: 20px;
+    border: solid black;
+    background-color: rgb(218, 20, 20);
+    color: white;
+}
+
+.Cerrar_user:hover {
+    background-color: rgb(169, 0, 0);
+    color: white;
+}
+
+.Modificar {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -275,6 +294,12 @@
     top: 25rem;
     border-radius: 20px;
     border: solid black;
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(30, 62, 203);
+    color: white;
+    margin-right: 100px;
+}
+
+.Modificar:hover {
+    background-color: rgb(19, 38, 152);
     color: white;
 }
